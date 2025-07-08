@@ -9,6 +9,7 @@ edition = "2018"
 [dependencies]
 honggfuzz = "=0.5.52"
 
+
 [dependencies.graph_harness]
 path = "../graph_harness"
 

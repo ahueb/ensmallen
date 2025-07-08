@@ -2,7 +2,8 @@ use crate::*;
 use core::sync::atomic::Ordering;
 use graph::{Graph, NodeT};
 use num_traits::Atomic;
-use parallel_frontier::prelude::*;
+use rayon::prelude::*;
+use parallel_frontier::Frontier;
 
 #[derive(Clone, Debug)]
 pub struct BasicSPINE {

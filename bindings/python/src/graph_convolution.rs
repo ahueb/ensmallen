@@ -61,9 +61,7 @@ impl GraphConvolution {
 }
 
 impl GraphConvolution {
-    fn _transform<
-        F1: Send + Sync + Copy + Element + AsPrimitive<f64> + AsPrimitive<f32>,
-    >(
+    fn _transform<F1: Send + Sync + Copy + Element + AsPrimitive<f64> + AsPrimitive<f32>>(
         &self,
         support: &Graph,
         node_features: &PyArray2<F1>,

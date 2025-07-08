@@ -2,7 +2,8 @@ use crate::*;
 use core::sync::atomic::Ordering;
 use graph::{Graph, NodeT};
 use num_traits::Atomic;
-use parallel_frontier::prelude::*;
+use rayon::prelude::*;
+use parallel_frontier::Frontier;
 
 #[derive(Clone, Debug)]
 pub struct BasicWINE {
@@ -107,17 +108,37 @@ where
                     });
             });
 
-            let variation: Frontier<Feature> = frontier
+            // let variation: Frontier<Feature> = frontier
+            //     .par_iter_vectors()
+            //     .map(|vector| {
+            //         vector
+            //             .iter()
+            //             .map(|&node_id| shared_features[node_id as usize].load(Ordering::Relaxed))
+            //             .collect::<Vec<Feature>>()
+            //     })
+            //     .collect::<Vec<Vec<Feature>>>()
+            //     .try_into()
+            //     .unwrap();
+
+            let variation_fragments: Vec<Vec<Feature>> = frontier
                 .par_iter_vectors()
                 .map(|vector| {
                     vector
                         .iter()
                         .map(|&node_id| shared_features[node_id as usize].load(Ordering::Relaxed))
-                        .collect::<Vec<Feature>>()
+                        .collect()
                 })
-                .collect::<Vec<Vec<Feature>>>()
-                .try_into()
-                .unwrap();
+                .collect();
+
+            // 2. create an empty Frontier with the right number of shards
+            let mut variation: Frontier<Feature> = Frontier::default();
+
+            // 3. overwrite each shard with its fragment
+            //    `AsMut<[Vec<_>]>` is implemented, so we can access the internal Vecs safely.
+            for (shard, fragment) in variation.as_mut().iter_mut().zip(variation_fragments) {
+                *shard = fragment;
+            }
+
 
             frontier
                 .par_iter()
