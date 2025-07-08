@@ -22,7 +22,8 @@ path = "src/test.rs"
 
 [dependencies]
 graph = { path = "../graph" }
-rayon = "1.5.0"
+rayon = "1.10.0"
+
 
 [profile.release]
 opt-level = 3

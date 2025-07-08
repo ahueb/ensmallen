@@ -13,7 +13,8 @@ libc = "0.2"
 signal-hook = "0.3.8"
 lazy_static = "1.4.0"
 backtrace = "0.3"
-rayon = "1.1"
+rayon = "1.10.0"
+
 
 [dependencies.graph]
 path = "../../graph"

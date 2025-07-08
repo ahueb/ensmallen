@@ -1,9 +1,9 @@
 
-BUILD_COMMAND="python3 ./build.py"
+BUILD_COMMAND="./build.py"
 MANYLINUX=sudo docker run --rm -v "$${PWD}:/io"
 
 python: 
-	(cd bindings/python; ${BUILD_COMMAND})
+	(cd bindings/python && python3 ${BUILD_COMMAND})
 
 python_manylinux2010: bindgen
 	${MANYLINUX} manylinux2010 make python
@@ -18,16 +18,13 @@ build_manylinux2014:
 	sudo docker build -t manylinux2014 -f ./setup/DockerFileManylinux2014 ./setup
 
 
-
-update:
-	(cd graph; cargo update)
-	(cd bindings/python; cargo update)
-	(cd code_analysis; cargo update)
-	(cd fuzzing/graph_harness; cargo update)
-	(cd fuzzing/graph_harness/fuzz; cargo update)
-	(cd fuzzing/honggfuzz/; cargo update)
-
-
+clean:
+	(cd graph; cargo clean)
+	(cd bindings/python; cargo clean)
+	(cd code_analysis; cargo clean)
+	(cd fuzzing/graph_harness; cargo clean)
+	(cd fuzzing/graph_harness/fuzz; cargo clean)
+	(cd fuzzing/honggfuzz/; cargo clean)
 
 
 bindgen:
@@ -38,9 +35,6 @@ check:
 
 build_metatest_harness:
 	(cd code_analysis; cargo run --release --bin metatest)
-
-
-
 
 test: test_from_vec test_meta_test test_graph check # test_from_csv 
 

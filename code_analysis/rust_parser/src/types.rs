@@ -655,12 +655,12 @@ mod test {
 
         assert_ne!(
             Type::parse_lossy("Result<impl ParallelIterator<Item=_>, _>".as_bytes()),
-            Type::parse_lossy("Result<impl ParallelIterator<Item=(u64, Vec<f64>, )> + '_, String>".as_bytes())
+            Type::parse_lossy("Result<impl ParallelIterator<Item=(u64, Vec<f64>, )> + 'a, String>".as_bytes())
         );
         
         assert!(
             Type::parse_lossy("Result<impl ParallelIterator<Item=_>, _>".as_bytes())
-                .cmp_str_without_modifiers(&"Result<impl ParallelIterator<Item=(u64, Vec<f64>, )> + '_, String>")
+                .cmp_str_without_modifiers(&"Result<impl ParallelIterator<Item=(u64, Vec<f64>, )> + 'a, String>")
         );
     }
 

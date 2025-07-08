@@ -15,6 +15,7 @@ cargo-fuzz = true
 [dependencies]
 libfuzzer-sys = { version = "0.3", features = ["arbitrary-derive"] }
 
+
 [dependencies.graph_harness]
 path = ".."
 

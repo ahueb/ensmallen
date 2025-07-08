@@ -26,7 +26,7 @@ log = "0.4.8"
 regex = "1.5.4"
 lazy_static="1.4.0"
 env_logger = "0.7.1"
-rayon = "1.6"
+rayon = "1.10.0"
 serde = "1.0.130"
 rand = {version="0.7", features = ["small_rng"] }
 itertools = "0.10.0"
@@ -48,13 +48,13 @@ heterogeneous_graphlets = {git = "https://github.com/LucaCappelletti94/heterogen
 v_htmlescape = "0.13.1"
 linked_hash_set = "0.1.4"
 hashbrown = {version="0.14", features=["rayon"]}
-indicatif = {version="0.16.0", features = ["rayon"]}
+indicatif = {version="0.17.0", features = ["rayon"]}
 arbitrary = { version = "0.4.5", features = ["derive"] }
 mmap = {path = "./mmap"}
 csr = {path = "./csr"}
 express_measures = {path = "./express_measures"}
 roaring = { git = "https://github.com/zommiommy/roaring-rs", branch = "master" }
-vec_rand = { git = "https://github.com/zommiommy/vec_rand", branch = "master" }
+vec_rand = { git = "https://github.com/ahueb/vec_rand", branch = "master" }
 visited-rs = { git = "https://github.com/LucaCappelletti94/visited-rs", branch = "main" }
 hyperloglog-rs = {version="0.1.51", features=["std"]}
 elias_fano_rust = "0.1.1"
@@ -63,6 +63,10 @@ atoi_radix10 = { git = "https://github.com/gilescope/atoi_radix10"}
 parallel_frontier = {git="https://github.com/zommiommy/parallel_frontier"}
 xxhash-rust = {version ="0.8.6", features=["xxh3"]}
 siphasher = "0.3"
+parquet="53.3.0"
+arrow-array="53.3.0"
+statrs = "0.13.0"
+
 
 [target.'cfg(unix)'.dependencies]
 nix = "0.22.0"
