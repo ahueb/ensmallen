@@ -51,7 +51,7 @@ where
                                        label: F,
                                        learning_rate: F| {
             let node_hidden = unsafe {
-                &mut (&mut (&mut *shared_embedding.get())[1])[(contextual_node_id as usize
+                &mut (&mut *shared_embedding.get())[1][(contextual_node_id as usize
                     * self.embedding_size)
                     ..((contextual_node_id as usize + 1) * self.embedding_size)]
             };

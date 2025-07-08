@@ -516,7 +516,7 @@ impl Graph {
                         let source_paths =
                             shortest_path_counts[src as usize].load(Ordering::Relaxed);
                         let current_number_of_successors =
-                            &mut (&mut (&mut *shared_successor_counts.get()))[src as usize];
+                            &mut (&mut *shared_successor_counts.get())[src as usize];
                         let mut number_of_successors = *current_number_of_successors;
                         let mut offset = self
                             .edges
@@ -525,7 +525,7 @@ impl Graph {
                             + number_of_successors as usize;
                         self.iter_unchecked_neighbour_node_ids_from_source_node_id(src)
                             .for_each(|dst: u32| {
-                                let status_ref = &mut (&mut (&mut *shared_visited_status.get()))[dst as usize];
+                                let status_ref = &mut (&mut *shared_visited_status.get())[dst as usize];
                                 let status = *status_ref;
 
                                 // If the node was not yet visited
@@ -548,7 +548,7 @@ impl Graph {
                                     shortest_path_counts[dst as usize]
                                         .fetch_add(source_paths, Ordering::Relaxed);
                                     non_temporal_store(
-                                        &mut (&mut (&mut *shared_successors.get()))[offset],
+                                        &mut (&mut *shared_successors.get())[offset],
                                         dst,
                                     );
                                     offset += 1;
@@ -735,7 +735,7 @@ impl Graph {
                         let source_paths =
                             shortest_path_counts[src as usize].load(Ordering::Relaxed);
                         let current_number_of_successors =
-                            &mut (&mut (&mut *shared_successor_counts.get()))[src as usize];
+                            &mut (&mut *shared_successor_counts.get())[src as usize];
                         let mut number_of_successors = *current_number_of_successors;
                         let mut offset = self
                             .edges
@@ -744,7 +744,7 @@ impl Graph {
                             + number_of_successors as usize;
                         self.iter_unchecked_neighbour_node_ids_from_source_node_id(src)
                             .for_each(|dst: u32| {
-                                let status_ref = &mut (&mut (&mut *shared_visited_status.get()))[dst as usize];
+                                let status_ref = &mut (&mut *shared_visited_status.get())[dst as usize];
                                 let status = *status_ref;
 
                                 // If the node was not yet visited
@@ -767,7 +767,7 @@ impl Graph {
                                     shortest_path_counts[dst as usize]
                                         .fetch_add(source_paths, Ordering::Relaxed);
                                     non_temporal_store(
-                                        &mut (&mut (&mut *shared_successors.get()))[offset],
+                                        &mut (&mut *shared_successors.get())[offset],
                                         dst,
                                     );
                                     offset += 1;

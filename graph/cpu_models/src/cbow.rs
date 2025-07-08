@@ -58,7 +58,7 @@ where
             let node_id = node_id as usize;
             unsafe {
                 element_wise_addition_inplace(
-                    &mut (&mut (&mut *shared_embedding.get())[1])
+                    &mut (&mut *shared_embedding.get())[1]
                         [node_id * self.embedding_size..(node_id + 1) * self.embedding_size],
                     variation,
                 )
@@ -82,7 +82,7 @@ where
         let get_contextual_node_embedding = |node_id: NodeT| {
             let node_id = node_id as usize;
             unsafe {
-                &mut (&mut (&mut *shared_embedding.get())[1])
+                &mut (&mut *shared_embedding.get())[1]
                     [(node_id * self.embedding_size)..((node_id + 1) * self.embedding_size)]
             }
         };

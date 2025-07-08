@@ -1,5 +1,5 @@
 extern crate graph;
-use graph::data_structures::{EdgesIter, CSR};
+use csr::{EdgesIter, CSR};
 use rayon::iter::plumbing::*;
 use rayon::iter::*;
 

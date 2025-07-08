@@ -92,13 +92,13 @@ impl Graph {
     /// * `nodes_prefixes`: Option<Vec<String>> - Prefixes of the nodes names to be samples as sources. If a node starts with any of the provided prefixes, it can be sampled as a source node.
     /// * `support`: Option<&Graph> - Parent graph of this subgraph, defining the `true` topology of the graph. Node degrees and connected components are sampled from this support graph when provided. Useful when sampling negative edges for a test graph. In this latter case, the support graph should be the training graph.
     fn get_graph_sampling_node_filter<'a>(
-        &'a self,
+        &'_ self,
         minimum_node_degree: Option<NodeT>,
         maximum_node_degree: Option<NodeT>,
         node_types_names: Option<Vec<String>>,
         edge_types_names: Option<Vec<String>>,
         nodes_prefixes: Option<Vec<String>>,
-        support: &'a Graph,
+        support: &'_ Graph,
     ) -> Result<(impl Fn(NodeT) -> bool + '_, bool)> {
         let minimum_node_degree = minimum_node_degree.unwrap_or(0);
         let maximum_node_degree = maximum_node_degree.unwrap_or(NodeT::MAX);
@@ -201,7 +201,7 @@ impl Graph {
     /// # Arguments
     /// * `enforce_node_type_connection_consistency`: bool - Whether to enforce that the sampled negative edges have the same node types as the positive edges. By default it is true only when the current graph instance has node types.
     fn get_graph_sampling_edge_filter<'a>(
-        &'a self,
+        &'_ self,
         enforce_node_type_connection_consistency: bool,
     ) -> Result<(impl Fn(NodeT, NodeT) -> bool + '_, bool)> {
         if enforce_node_type_connection_consistency && !self.has_node_types() {

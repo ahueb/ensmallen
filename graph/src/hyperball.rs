@@ -182,7 +182,7 @@ impl Graph {
 
                             // We get the current node counters
                             let (counter, previous_counter) = (
-                                unsafe { &mut (&mut (&mut *primary_counters.get()))[node_id as usize] },
+                                unsafe { &mut (&mut *primary_counters.get())[node_id as usize] },
                                 unsafe { &(&(*secondary_counters.get()))[node_id as usize] },
                             );
 
@@ -202,7 +202,7 @@ impl Graph {
 
                             // Update the centrality value for the current node
                             counters_ops(
-                                unsafe { &mut (&mut (&mut *shared_centralities.get()))[node_id as usize] },
+                                unsafe { &mut (&mut *shared_centralities.get())[node_id as usize] },
                                 new_counter.estimate_cardinality(),
                                 previous_counter.estimate_cardinality(),
                                 iteration,

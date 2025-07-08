@@ -59,7 +59,7 @@ where
                 .for_each(|(src, dst, count)| unsafe {
                     let src_embedding = &mut (&mut *shared_embedding.get())[0]
                         [(src as usize) * embedding_size..((src as usize) + 1) * embedding_size];
-                    let dst_embedding = &mut (&mut (&mut *shared_embedding.get())[1])
+                    let dst_embedding = &mut (&mut *shared_embedding.get())[1]
                         [(dst as usize) * embedding_size..((dst as usize) + 1) * embedding_size];
 
                     let dot: F = dot_product_sequential_unchecked(src_embedding, dst_embedding)
