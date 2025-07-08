@@ -22,21 +22,21 @@
             //    "rustflags":"-C target-cpu=icelake-server"
             //},
             // version optimized for the relatively new google cloud cpus
-            //"cascadelake":{
-            //    "build_dir":"build_cascadelake",
-            //   "rustflags":"-C target-cpu=cascadelake"
-            //},
+            "cascadelake":{
+               "build_dir":"build_cascadelake",
+              "rustflags":"-C target-cpu=cascadelake"
+            },
             
             // good balance of compatability and speed, (2013)
-            "haswell":{
-                "build_dir":"build_haswell",
-                "rustflags":"-C target-cpu=haswell"
-            },
-            // full compatability (2006)
-            "core2":{
-                "build_dir":"build_core2",
-                "rustflags":"-C target-cpu=core2"
-            }
+            // "haswell":{
+            //     "build_dir":"build_haswell",
+            //     "rustflags":"-C target-cpu=haswell"
+            // },
+            // // full compatability (2006)
+            // "core2":{
+            //     "build_dir":"build_core2",
+            //     "rustflags":"-C target-cpu=core2"
+            // }
         }
         // },
 		// // Cross compile linux for docker on mac M1
