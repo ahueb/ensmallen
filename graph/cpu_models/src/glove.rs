@@ -65,8 +65,8 @@ where
                     let dot: F = dot_product_sequential_unchecked(src_embedding, dst_embedding)
                         / scale_factor;
 
-                    let src_bias = &mut (&mut (*center_node_embedding.get()))[src as usize];
-                    let dst_bias = &mut (&mut (*context_node_embedding.get()))[dst as usize];
+                    let src_bias = &mut (&mut *center_node_embedding.get())[src as usize];
+                    let dst_bias = &mut (&mut *context_node_embedding.get())[dst as usize];
 
                     let variation = learning_rate
                         * weighting_schema(count)

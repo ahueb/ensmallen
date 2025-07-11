@@ -211,7 +211,7 @@ pub trait MethodCallerTraitSequential<T, R, S> {
         self,
         method: fn(&mut S, T) -> R,
         context: &mut S,
-    ) -> SequentialMethodCaller<T, R, S, Self>
+    ) -> SequentialMethodCaller<'_, T, R, S, Self>
     where
         Self: Iterator<Item = T> + Sized,
     {

@@ -47,7 +47,7 @@ pub fn dump_panic_info(path: String, info: &std::panic::PanicInfo){
         dump!(file, "col",  s.column());
     }
 
-    if let Some(s) = info.message() {
+    if let Some(s) = info.payload_as_str() {
         dump!(file, "message", s);
     }
 }

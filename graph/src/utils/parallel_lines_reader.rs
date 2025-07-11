@@ -16,7 +16,7 @@ pub struct ParallelLines<'a> {
 }
 
 impl<'a> ParallelLines<'a> {
-    pub fn new(path: &str) -> Result<ParallelLines> {
+    pub fn new(path: &str) -> Result<ParallelLines<'_>> {
         match File::open(path) {
             Ok(_) => Ok(()),
             Err(_) => Err(format!("Cannot open file {}", path)),
@@ -30,7 +30,7 @@ impl<'a> ParallelLines<'a> {
         })
     }
 
-    pub fn with_capacity(path: &str, number_of_lines: usize) -> Result<ParallelLines> {
+    pub fn with_capacity(path: &str, number_of_lines: usize) -> Result<ParallelLines<'_>> {
         match File::open(path) {
             Ok(_) => Ok(()),
             Err(_) => Err(format!("Cannot open file {}", path)),

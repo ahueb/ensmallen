@@ -1,5 +1,6 @@
 #![feature(panic_info_message)]
 #![feature(thread_id_value)]
+#![feature(panic_payload_as_str)]
 extern crate graph;
 pub(crate) use graph::*;
 

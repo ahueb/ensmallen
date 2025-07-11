@@ -253,18 +253,27 @@ impl GraphConvolution {
 
             (0..self.number_of_convolutions).for_each(|convolution_number| {
                 // We reset the edge_ids_mask_counters.
+                // let rows = unsafe {
+                //     &mut *convolved_node_features.get()
+                // };
+                // rows.iter_mut()
+                //     .for_each(|counter| {
+                //         *counter = F2::zero();
+                //     });
                 unsafe {
-                    (&mut *edge_ids_mask_counters.get())
+                    let _ = &mut (&mut *edge_ids_mask_counters.get())
                         .iter_mut()
                         .for_each(|counter| {
                             *counter = 0;
                         });
                 }
-
-                unsafe {
-                    (&mut *convolved_node_features.get())
-                        .par_chunks_exact_mut(convolved_node_features_row_size)
-                }
+                let rows: &mut [F2] = unsafe { &mut *convolved_node_features.get() };
+                rows.par_chunks_exact_mut(convolved_node_features_row_size)
+                // unsafe {
+                //     &mut (&mut *convolved_node_features.get())
+                //         .par_chunks_exact_mut(convolved_node_features_row_size)
+                // }
+                // rows.par_chunks_exact_mut(convolved_node_features_row_size)
                 .enumerate()
                 .for_each(|(node_id, convoluted_row)| {
                     // We retrieve the thread id for the current thread.
@@ -346,10 +355,12 @@ impl GraphConvolution {
 
                 // If requested, we normalize the features associated to the i-th iteration.
                 if self.normalize_rows {
-                    unsafe {
-                        (&mut *convolved_node_features.get())
-                            .par_chunks_exact_mut(convolved_node_features_row_size)
-                    }
+                    let rows: &mut [F2] = unsafe { &mut *convolved_node_features.get() };
+                    rows.par_chunks_exact_mut(convolved_node_features_row_size)
+                    // unsafe {
+                    //     &mut (*convolved_node_features.get())
+                    //         .par_chunks_exact_mut(convolved_node_features_row_size)
+                    // }
                     .for_each(|convoluted_row| {
                         // We compute the norm of the current row.
                         let norm = convoluted_row

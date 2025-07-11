@@ -912,7 +912,7 @@ impl Graph {
     /// * `k`: NodeT - Number of central nodes to extract.
     pub fn get_top_k_central_node_names(&self, k: NodeT) -> Result<Vec<String>> {
         self.get_top_k_central_node_ids(k).map(|x| {
-            x.into_iter()
+            IntoIterator::into_iter(x)
                 .map(|node_id| unsafe { self.get_unchecked_node_name_from_node_id(node_id) })
                 .collect()
         })
